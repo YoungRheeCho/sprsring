@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>multiple</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+곱셈 결과는?
+<span th:text="${result}" id = "result_span"> </span>
+
+<input type="number" id="input_a" />
+<input type="number" id="input_b" />
+
+<button onclick="listener_homework()">곱하기!</button>
+
+<script>
+    function listener_homework(){
+        $.ajax({
+            url: '/api/multiply',
+            method: 'GET',
+            data : {
+                a : $("#input_a").val()
+                , b : $("#input_b").val()
+            },
+            success: function (data, status, xhr) {
+                alert("data : : " + JSON.stringify(data));
+                $("#result_span").text(data.result);
+            },
+            error: function (data, status, err) {
+                alert("error : : " + JSON.stringify(data));
+            },
+            complete: function () {
+            }
+        });
+    }
+</script>
+</body>
+</html>
