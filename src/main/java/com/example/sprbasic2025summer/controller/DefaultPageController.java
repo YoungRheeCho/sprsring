@@ -56,4 +56,11 @@ public class DefaultPageController {
         */
         return "calculate";
     }
+
+    @RequestMapping("/multiply")
+    public String multiply(int num1, int num2, Model model){
+        int result = num1 * num2;
+        model.addAttribute("result", result);
+        return "multiply";
+    }
 }

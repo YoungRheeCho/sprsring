@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Board Create </title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+detail<br/>
+id : <input type="text" id = "input_id"/></br>
+title : <input type="text" id = "input_title"/></br>
+content : <input type="text" id = "input_content"/></br>
+author : <input type="text" id = "input_author"/></br>
+
+
+<button onclick = "detail_board()">조회하기!</button>
+<button onclick = "update_board()">수정하기</button>
+<button onclick = "delete_board()">삭제하기</button>
+<script>
+    function detail_board(){
+        var id = $("#input_id").val();
+        $.ajax({
+            method: 'GET',
+            url: '/api/board/detail/' + id,
+            success: function (data, status, xhr) {
+                alert("data : : " + JSON.stringify(data));
+                $("#input_title").val(data.title);
+                $("#input_content").val(data.content);
+                $("#input_author").val(data.author);
+            },
+            error: function (data, status, err) {
+                alert("error : : " + JSON.stringify(data));
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function update_board(){
+        var id = $("#input_id").val();
+        $.ajax({
+            method: 'GET',
+            url: '/api/board/update/' + encodeURIComponent(id),
+            data : {
+                id : $("#input_id").val()
+                , title : $("#input_title").val()
+                , content : $("#input_content").val()
+                , author : $("#input_author").val()
+            },
+            success: function (data, status, xhr) {
+                alert("data : : " + JSON.stringify(data));
+            },
+            error: function (data, status, err) {
+                alert("error : : " + JSON.stringify(data));
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function delete_board(){
+        var id = $("#input_id").val();
+        $.ajax({
+            method: 'GET',
+            url: '/api/board/delete/' + id,
+            success: function (data, status, xhr) {
+                alert("data : : " + JSON.stringify(data));
+            },
+            error: function (data, status, err) {
+                alert("error : : " + JSON.stringify(data));
+            },
+            complete: function () {
+            }
+        });
+    }
+</script>
+</body>
+</html>
