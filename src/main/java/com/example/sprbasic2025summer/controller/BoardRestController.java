@@ -13,10 +13,10 @@ import java.util.*;
 @RequestMapping("/api/board")
 @RestController
 public class BoardRestController {
-    BoardService boardService;
-    BoardRestController(BoardService boardService){
+    final BoardService boardService;
+    /*BoardRestController(BoardService boardService){
         this.boardService = boardService;
-    }
+    }*/
 
     @RequestMapping("/create")
     public Map<String,Object> create(@RequestParam Map<String,Object> param){
